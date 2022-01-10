@@ -1,21 +1,20 @@
 function getPostData() {
-  // Hardcode the post data for now.
-  return {
-    userId: 1,
-    id: 1,
-    title:
-      "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
-    body: "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto",
-  };
+  return fetch("https://jsonplaceholder.typicode.com/posts/1");
 }
 
 function renderPost(postData) {
   let postHeadingHTML = `<h1>${postData.title}</h1>`;
-  let postWithLinebreaksHTML = postData.body.replaceAll("\n", "<br>\n");
-  let postBodyHTML = `<p>${postWithLinebreaksHTML}</p>`;
-  return `${postHeadingHTML}${postBodyHTML}`;
+    let postWithLinebreaksHTML = postData.body.replaceAll("\n", "<br>\n");
+    let postBodyHTML = `<p>${postWithLinebreaksHTML}</p>`;
+    return `${postHeadingHTML}${postBodyHTML}`;
 }
 
 let post = getPostData();
+// console.log(post);
+// // Promise {<pending>}
+// // [[Prototype]]: Promise
+// // [[PromiseState]]: "fulfilled"
+// // [[PromiseResult]]: Response
 let rendered = renderPost(post);
+// console.log(rendered);
 document.getElementById("main").innerHTML = rendered;

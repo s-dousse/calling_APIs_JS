@@ -1,31 +1,24 @@
 function getPostData() {
-  return fetch("https://jsonplaceholder.typicode.com/posts/1").then(
-    (response) => {
-      // We have the response! => there's a response before all the data has been received
-      response.json().then((json) => {
-        // We have the JSON! => second layers of promises to get the data
-        // Javascript PROMISES to call this function in the FUTURE
-        // when the response has been received and the JSON parsed.
-        console.log(json);
-        // return json;
-      });
-    }
-  );
+  fetch("https://jsonplaceholder.typicode.com/posts/1").then((response) => {
+    response.json().then((post) => {
+      // ...to here.
+      // console.log(post);
+      let rendered = renderPost(post);
+      document.getElementById("main").innerHTML = rendered;
+    });
+  });
 }
 
 function renderPost(postData) {
   let postHeadingHTML = `<h1>${postData.title}</h1>`;
-  let postWithLinebreaksHTML = postData.body.replaceAll("\n", "<br>\n");
-  let postBodyHTML = `<p>${postWithLinebreaksHTML}</p>`;
+  // let postWithLinebreaksHTML = postData.body.replaceAll("\n", "<br>\n");
+  let postBodyHTML = `<p>${postData.body}</p>`;
   return `${postHeadingHTML}${postBodyHTML}`;
 }
 
 let post = getPostData();
-// console.log(post);
-// Promise {<pending>}
+// Promise fufilled
 // [[Prototype]]: Promise
 // [[PromiseState]]: "fulfilled"
 // [[PromiseResult]]: Object
-let rendered = renderPost(post);
-// console.log(rendered);
-document.getElementById("main").innerHTML = rendered;
+// Move the things we need to happen IN THE FUTURE from here...
